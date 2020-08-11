@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whatsapp Chat Export</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="container">
+        <form action="/chats/export" method="GET">
+            <div class="form-group">
+                <label for="mobileNumber">Mobile number of chat partner</label>
+                <select class="form-control" id="mobileNumber" name="mobile">
+                {{ range .MobileNumber}}
+                    <option value="{{ . }}">{{ . }}</option>
+                {{ end }}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="filesToExport">Select file types</label>
+                <select multiple class="form-control" id="filesToExport" name="files">
+                    <option value="text">Text</option>
+                    <option value="audio">Audio</option>
+                    <option value="image">Images</option>
+                    <option value="video">Video</option>
+                    <option value="document">Documents</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

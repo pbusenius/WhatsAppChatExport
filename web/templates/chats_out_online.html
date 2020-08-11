@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whatsapp Chat Export</title>
+    <link rel="stylesheet" href="../static/css/chat.css">
+</head>
+<body>
+    <h2>Nachrichten</h2>
+    {{ range . }}
+        {{ if eq .MessageType "text" }}
+            {{ if .FromMe }}
+                <div class="container darker">
+                    <p>{{ .MessageContent }}</p>
+                    <span class="time-left">{{ .MessageTime }}</span>
+                </div>
+            {{ else }}
+                <div class="container">
+                    <p>{{ .MessageContent }}</p>
+                    <span class="time-right">{{ .MessageTime }}</span>
+                </div>
+            {{ end }}
+        {{ end }}
+        {{ if eq .MessageType "image" }}
+            {{ if .FromMe}}
+                <div class="container darker">
+                    <img src="/export/{{ .MessageContent }}" alt="{{ .MessageContent }}">
+                    <span class="time-left">{{ .MessageTime }}</span>
+                </div>
+            {{ else }}
+                <div class="container">
+                    <img src="/export/{{ .MessageContent }}" alt="">
+                    <span class="time-right">{{ .MessageTime }}</span>
+                </div>
+            {{ end }}
+        {{ end }}
+        {{ if eq .MessageType "audio" }}
+            {{ if .FromMe}}
+                <div class="container darker">
+                    <audio controls>
+                        <source src="/export/{{ .MessageContent }}" type="audio/ogg">
+                    </audio>
+                    <span class="time-left">{{ .MessageTime }}</span>
+                </div>
+            {{ else }}
+                <div class="container">
+                    <audio controls>
+                        <source src="/export/{{ .MessageContent }}" type="audio/ogg">
+                    </audio>
+                    <span class="time-right">{{ .MessageTime }}</span>
+                </div>
+            {{ end }}
+        {{ end }}
+        {{ if eq .MessageType "video" }}
+            {{ if .FromMe}}
+                <div class="container darker">
+                    <video width="320" height="240" controls>
+                        <source src="/export/{{ .MessageContent }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <span class="time-left">{{ .MessageTime }}</span>
+                </div>
+            {{ else }}
+                <div class="container">
+                    <video width="320" height="240" controls>
+                        <source src="/export/{{ .MessageContent }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <span class="time-right">{{ .MessageTime }}</span>
+                </div>
+            {{ end }}
+        {{ end }}
+    {{end}}
+</body>
+</html>
